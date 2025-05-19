@@ -12,6 +12,19 @@
 <body>
   <div class="container text-center">
     <h1>CRUD con libros</h1>
+    <form action="{{route('books.store')}}" method='post'>
+      @csrf
+      <label for="title">Titulo Libro
+        <input type="text" name="title" id="title">
+      </label>
+      <label for="author"> Autor
+        <input type="text" name="author" id="author">
+      </label>
+      <label for="price">Precio
+        <input type="number" name="price" id="price">
+      </label>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -29,7 +42,17 @@
           <td>{{$book->title}}</td>
           <td>{{$book->author}}</td>
           <td>{{$book->price}}</td>
-          <td></td>
+          <td class="d-flex justify-content-center gap-4">
+            <a href="{{route('books.edit',$book->id)}}" class="btn btn-warning">Edit</a>
+            <!-- formulario para el crud -->
+            <form action="{{route('books.destroy',$book->id)}}" method="post">
+              @csrf
+              <!-- token para evitar ataques -->
+              @method('DELETE')
+              <!-- definir que metodo se va a usar -->
+              <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+          </td>
         </tr>
         @endforeach
       </tbody>
