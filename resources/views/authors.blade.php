@@ -11,17 +11,17 @@
 
 <body>
   <div class="container text-center">
-    <h1>CRUD con libros</h1>
-    <form action="{{route('books.store')}}" method='post'>
+    <h1>CRUD con autores</h1>
+    <form action="{{route('authors.store')}}" method='post'>
       @csrf
-      <label for="title">Titulo Libro
-        <input type="text" name="title" id="title">
+      <label for="name">Nombre
+        <input type="text" name="name" id="name">
       </label>
-      <label for="author"> Autor
-        <input type="text" name="author" id="author">
+      <label for="email"> Email
+        <input type="text" name="email" id="email">
       </label>
-      <label for="price">Precio
-        <input type="number" name="price" id="price">
+      <label for="birth_day">Fecha de nacimiento
+        <input type="date" name="birth_day" id="birth_day">
       </label>
       <button type="submit" class="btn btn-primary">Save</button>
     </form>
@@ -29,23 +29,23 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Price</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Fecha de nacimiento</th>
           <th>Options</th>
         </tr>
       </thead>
       <tbody>
-        @foreach ($books as $book)
+        @foreach ($authors as $author)
         <tr>
-          <td>{{$book->id}}</td>
-          <td>{{$book->title}}</td>
-          <td>{{$book->author}}</td>
-          <td>{{$book->price}}</td>
+          <td>{{$author->id}}</td>
+          <td>{{$author->name}}</td>
+          <td>{{$author->email}}</td>
+          <td>{{$author->birth_day}}</td>
           <td class="d-flex justify-content-center gap-4">
-            <a href="{{route('books.edit',$book->id)}}" class="btn btn-warning">Edit</a>
+            <a href="{{route('authors.edit',$author->id)}}" class="btn btn-warning">Edit</a>
             <!-- formulario para el crud -->
-            <form action="{{route('books.destroy',$book->id)}}" method="post">
+            <form action="{{route('authors.destroy',$author->id)}}" method="post">
               @csrf
               <!-- token para evitar ataques -->
               @method('DELETE')
